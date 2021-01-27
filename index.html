@@ -1,0 +1,85 @@
+<!doctype html>
+<head>
+<link rel="icon" href="a.jpg">
+<style>
+
+h1 {text-align: center;}
+h3 {text-align: center;}
+input {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+
+#rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  width: 250px;
+  height: 10px;
+  text-align: center;
+}
+
+#rcorners3 {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  width: 250px;
+  height: 10px;
+  text-align: center;
+}
+
+#rcorners4 {
+  border-radius: 15px;
+  background: #73AD21;
+  padding: 20px;
+  margin: 40px
+  width: 100px;
+  height: 80px;
+
+#rcorners5 {
+  border-radius: 15px;
+  background: #73AD21;
+  padding: 20px;
+  width: 800px;
+  height: 20px;
+}
+</style>
+</head>
+
+
+<title>Chest X-Ray Diagnosis</title>
+<h1 style="background-color:#D79B11" id=rcorners5>Preliminary Pneumonia Diagnosis</h1>
+<body style="background-color:#505b6d">
+  <form method=post enctype=multipart/form-data>
+    <div style="background-color:#1D5579">
+    <input type=file name=image align="centre">
+    <input type=submit value=Predict align="centre">
+    <input type="checkbox" id="info" name="info" value="info">
+    <label for="info"> show more information</label><br>
+    </div>
+    <br>
+    <div  style="background-color:#B7DBF1"  id=rcorners4 >
+    <h3>{{p}}.<br>The image is being classified with probability {{prediction}}.</h3>
+    </div>
+    <br>
+
+    {% if ((image_loc) and (masked_im_loc) and (consent=='y')) %}
+    <div class="row">
+    <div class="column" >
+      <div>
+      <h3 id=rcorners2>Original image</h3>
+      </div>
+      <img src="/static/{{image_loc}}"  style="width:20%" />
+      <h3 id=rcorners3>Effected area in the image</h3>
+      <img src="/static/{{masked_im_loc}}"   style="width:20%" />
+    </div>
+    </div>
+    {% endif %}
+  </form>
+
+{% if consent=='y' %}
+<p style="font-size:20px">The masked area in the predicted image shows the area of the X-Ray which has led to the classification of the image in the predicted category. </p>
+{% endif %}
+<p style="font-size:20px">To know more please visit <a href="https://www.mayoclinic.org/diseases-conditions/pneumonia/multimedia/chest-x-ray-showing-pneumonia/img-20005827">MayoClinic</a>.</p>
+
+</body>
+</html>
